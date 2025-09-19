@@ -43,7 +43,7 @@ def compute_qhat(cal_scores, alpha):
     for bucket in cal_scores:
         n = len(bucket)
         if n == 0:
-            qhat_list.append(1.0)  # 如果没数据，给个保守阈值
+            qhat_list.append(1.0)  
             continue
         q = np.ceil((n + 1) * (1 - alpha)) / n
         q = min(max(0, q), 1)
@@ -110,10 +110,11 @@ if __name__ == "__main__":
     y_true = [0] * len(human_preds) + [1] * len(machine_preds)
     y_pred = [int(p) for p in human_preds] + [int(p) for p in machine_preds]
 
-    fpr = np.mean(human_preds)  # FPR = human 被预测成 AI 的比例
-    tpr = np.mean(machine_preds)  # TPR = machine 被预测成 AI 的比例
+    fpr = np.mean(human_preds)  # FPR 
+    tpr = np.mean(machine_preds)  # TPR 
     f1 = f1_score(y_true, y_pred)
 
     print("FPR:", fpr)
     print("TPR:", tpr)
     print("F1 :", f1)
+
